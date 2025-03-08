@@ -1,7 +1,7 @@
 export const metadata = {
-  title: "App Router",
+  title: "Trang chủ",
 };
 
 export default function Page() {
-  return <h1>App Router</h1>;
+  return <p className="font-bold">Trang chủ</p>;
 }
