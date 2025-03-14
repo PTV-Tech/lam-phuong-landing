@@ -105,7 +105,7 @@ const index = () => {
   useEffect(() => {
     const sections = document.querySelectorAll("section.section");
     const options = {
-      threshold: 0.5,
+      threshold: 0.9,
     };
 
     const observer = new IntersectionObserver((entries) => {
