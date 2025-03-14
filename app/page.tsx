@@ -9,6 +9,7 @@ import Studies from "./components/studies";
 import Careers from "./components/careers";
 import Partners from "./components/partners";
 import Footer from "./components/footer";
+import { RouterRoot } from "@/app/contants";
 
 const page = () => {
   return (
@@ -16,13 +17,31 @@ const page = () => {
       <Header />
 
       <main>
-        <Banner />
-        <About />
-        <Services />
+        <section id={RouterRoot.Home} className="section">
+          <Banner />
+        </section>
+
+        <section id={RouterRoot.About} className="section">
+          <About />
+        </section>
+
+        <section id={RouterRoot.Service} className="section">
+          <Services />
+        </section>
+
         <Parallax />
-        <Studies />
-        <Careers />
-        <Partners />
+
+        <section id={RouterRoot.Studies} className="section">
+          <Studies />
+        </section>
+
+        <section id={RouterRoot.Career} className="section">
+          <Careers />
+        </section>
+
+        <section id={RouterRoot.Partner} className="section">
+          <Partners />
+        </section>
       </main>
 
       <Footer />
