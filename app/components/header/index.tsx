@@ -96,7 +96,7 @@ const SideBar = ({ activeMenu }: { activeMenu: string }) => {
   );
 };
 
-const index = () => {
+const index = ({ base = "" }) => {
   const [scrolled, setScrolled] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string>("");
   const router = useRouter();
@@ -132,8 +132,13 @@ const index = () => {
     };
   }, [pathname, router]);
   useEffect(() => {
-    if (!!window) {
-      setActiveMenu(window.location.hash);
+    if (!window) {
+      return;
+    }
+    setActiveMenu(window.location.hash);
+    if (window.scrollY > 70) {
+      setScrolled(true);
+      return;
     }
   }, []);
 
@@ -169,7 +174,7 @@ const index = () => {
           <div className="menu hidden md:hidden xl:block">
             <ul className="flex gap-8">
               {MENU_ITEMS.map((menu) => {
-                const url = `#${menu.key}`;
+                const url = `${base}#${menu.key}`;
 
                 return (
                   <li key={menu.key}>

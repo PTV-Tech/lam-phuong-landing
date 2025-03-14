@@ -11,13 +11,12 @@ export async function GET() {
       })
       .firstPage();
     const data = response
-      .map((item) => item.fields)
       .map((item) => ({
-        title: item["Title"],
-        summary: item["Summary"],
-        id: item["ID"],
-        location: Array.isArray(item["Locations"]) ? item["Locations"][0] : "",
-        slug: item["Slug"],
+        title: item.fields["Title"],
+        summary: item.fields["Summary"],
+        id: item.fields["ID"],
+        location: Array.isArray(item.fields["Locations"]) ? item.fields["Locations"][0] : "",
+        slug: `${item.fields["Slug"]}-${item.id}`,
       }));
     return new Response(JSON.stringify(data), {
       status: 200,

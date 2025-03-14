@@ -8,6 +8,7 @@ import {
 } from "@radix-ui/react-accordion";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import Link from "next/link";
+import SubscribeSection from "@/app/careers/components/SubscribeSection";
 
 export const metadata = {
   title: "Tuyển dụng",
@@ -21,7 +22,7 @@ export default async function Page() {
 
   return (
     <>
-      <Header />
+      <Header base="/" />
       <main className="carrers pt-[116px]">
         <div className="container mx-auto px-6 lg:px-0 relative">
           <div className="lg:max-w-6xl mx-auto lg:py-16 py-5 relative">
@@ -147,32 +148,9 @@ export default async function Page() {
                     </AccordionItem>
                   </Accordion>
                 </div>
-                <div className="border border-light xl:p-5 p-3.5 rounded-3xl mt-5  bg-white">
-                  <p className="text-[16px] font-bold">
-                    Nhận thông báo về công việc mới nhất
-                  </p>
-                  <form className="grid grid-cols-3 mt-3 gap-2 w-full">
-                    <div className="col-span-2 relative w-full flex items-center gap-3">
-                      <svg
-                        width="13"
-                        height="11"
-                        className="absolute left-3 top-3"
-                      >
-                        <use xlinkHref="../images/icons.svg#icon-evelop"></use>
-                      </svg>
-                      <input
-                        type="text"
-                        placeholder="Địa chỉ email"
-                        className="border border-light rounded-3xl px-5 pl-8 py-1
-                            xl:placeholder:text-[18px] placeholder:text-light text-[14px] xl:text-[16px] w-full"
-                      />
-                    </div>
-                    <button className="col-span-1 border border-light py-1 px-3 rounded-3xl bg-light text-white text-[14px] xl:text-[16px]">
-                      Đăng ký
-                    </button>
-                  </form>
-                </div>
+                <SubscribeSection />
               </div>
+
               <div className="col-span-2 relative z-1">
                 {data.map((item: any) => {
                   return (
