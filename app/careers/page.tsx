@@ -14,11 +14,12 @@ export const metadata = {
   title: "Tuyển dụng",
 };
 
+export const dynamic = 'force-dynamic'
 export default async function Page() {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_SITE_URL}/api/careers`,
   );
-  const data = await response.json();
+  const data = await response.json() as any;
 
   return (
     <>

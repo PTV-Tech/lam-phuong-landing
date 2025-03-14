@@ -1,5 +1,5 @@
 "use client";
-import { Fragment } from "react";
+import {Fragment, Suspense} from "react";
 import Header from "./components/header";
 import Banner from "./components/banner";
 import About from "./components//about";
@@ -18,7 +18,9 @@ const page = () => {
 
       <main>
         <section id={RouterRoot.Home} className="section">
-          <Banner />
+          <Suspense>
+            <Banner />
+          </Suspense>
         </section>
 
         <section id={RouterRoot.About} className="section">
