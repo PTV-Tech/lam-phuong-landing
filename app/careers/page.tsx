@@ -1,4 +1,3 @@
-import React from "react";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import {
@@ -8,15 +7,21 @@ import {
   AccordionTrigger,
 } from "@radix-ui/react-accordion";
 import { ChevronDown, ChevronRight } from "lucide-react";
+import Link from "next/link";
 
 export const metadata = {
   title: "Tuyển dụng",
 };
 
-export default function Page() {
+export default async function Page() {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_SITE_URL}/api/careers`,
+  );
+  const data = await response.json();
+
   return (
     <>
-      <Header/>
+      <Header />
       <main className="carrers pt-[116px]">
         <div className="container mx-auto px-6 lg:px-0 relative">
           <div className="lg:max-w-6xl mx-auto lg:py-16 py-5 relative">
@@ -169,128 +174,42 @@ export default function Page() {
                 </div>
               </div>
               <div className="col-span-2 relative z-1">
-                <div className="group rounded-3xl p-4 border border-light shadow-[0_2px_0_rgba(66,157,165,1)] flex flex-col gap-4 mb-6 bg-white">
-                  <h2>
-                    <a
-                      href=""
-                      className="group-hover:text-light hover:text-light text-[24px] lg:text-[36px] leading-9"
+                {data.map((item: any) => {
+                  return (
+                    <div
+                      key={item.id}
+                      className="group rounded-3xl p-4 border border-light shadow-[0_2px_0_rgba(66,157,165,1)] flex flex-col gap-4 mb-6 bg-white"
                     >
-                      Account Management
-                    </a>
-                  </h2>
-                  <p>
-                    Lam Phương đang tìm kiếm một Account Management tài năng và
-                    nhiệt huyết để gia nhập đội ngũ của chúng tôi. Bạn sẽ có cơ
-                    hội làm việc trong một môi trường năng động, chuyên nghiệp
-                    và phát triển sự nghiệp.
-                  </p>
-                  <div className="flex justify-between items-center">
-                    <div className="group">
-                      <div className="flex items-center gap-2">
-                        <svg width="13" height="18">
-                          <use xlinkHref="../images/icons.svg#icon-location"></use>
-                        </svg>
-                      <p className="text-light">TP. Hồ Chí Minh</p>
+                      <Link href={`/careers/detail/${item.id}`}>
+                        <h2 className="group-hover:text-light hover:text-light text-[24px] lg:text-[36px] leading-9">
+                          {item.title}
+                        </h2>
+                      </Link>
+                      <p className="line-clamp-3">{item.description}</p>
+                      <div className="flex justify-between items-center">
+                        <div className="group">
+                          <div className="flex items-center gap-2">
+                            <svg width="13" height="18">
+                              <use xlinkHref="../images/icons.svg#icon-location"></use>
+                            </svg>
+                            <p className="text-light">{item.location}</p>
+                          </div>
+                        </div>
+                        <Link href="https://airtable.com/applRt3FQ5QTJY6sn/pag3suI5n5zwMkT6o/form">
+                          <button className="cursor-pointer text-light lg:text-[18px] border border-light rounded-3xl px-4 py-1 hover:bg-light hover:text-white">
+                            Ứng tuyển ngay
+                          </button>
+                        </Link>
                       </div>
                     </div>
-                    <button className="cursor-pointer text-light lg:text-[18px] border border-light rounded-3xl px-4 py-1 hover:bg-light hover:text-white">
-                      Ứng tuyển ngay
-                    </button>
-                  </div>
-                </div>
-                <div className="group rounded-3xl p-4 border border-light shadow-[0_2px_0_rgba(66,157,165,1)] flex flex-col gap-4 mb-6 bg-white">
-                  <h2>
-                    <a
-                      href=""
-                      className="group-hover:text-light hover:text-light text-[24px] lg:text-[36px] leading-9"
-                    >
-                      Account Management
-                    </a>
-                  </h2>
-                  <p>
-                    Lam Phương đang tìm kiếm một Account Management tài năng và
-                    nhiệt huyết để gia nhập đội ngũ của chúng tôi. Bạn sẽ có cơ
-                    hội làm việc trong một môi trường năng động, chuyên nghiệp
-                    và phát triển sự nghiệp.
-                  </p>
-                  <div className="flex justify-between items-center">
-                    <div className="group">
-                      <div className="flex items-center gap-2">
-                        <svg width="13" height="18">
-                          <use xlinkHref="../images/icons.svg#icon-location"></use>
-                        </svg>
-                        <p className="text-light">TP. Hồ Chí Minh</p>
-                      </div>
-                    </div>
-                    <button className="cursor-pointer text-light lg:text-[18px] border border-light rounded-3xl px-4 py-1 hover:bg-light hover:text-white">
-                      Ứng tuyển ngay
-                    </button>
-                  </div>
-                </div>
-                <div className="group rounded-3xl p-4 border border-light shadow-[0_2px_0_rgba(66,157,165,1)] flex flex-col gap-4 mb-6 bg-white">
-                  <h2>
-                    <a
-                      href=""
-                      className="group-hover:text-light hover:text-light text-[24px] lg:text-[36px] leading-9"
-                    >
-                      Account Management
-                    </a>
-                  </h2>
-                  <p>
-                    Lam Phương đang tìm kiếm một Account Management tài năng và
-                    nhiệt huyết để gia nhập đội ngũ của chúng tôi. Bạn sẽ có cơ
-                    hội làm việc trong một môi trường năng động, chuyên nghiệp
-                    và phát triển sự nghiệp.
-                  </p>
-                  <div className="flex justify-between items-center">
-                    <div className="group">
-                      <div className="flex items-center gap-2">
-                        <svg width="13" height="18">
-                          <use xlinkHref="../images/icons.svg#icon-location"></use>
-                        </svg>
-                        <p className="text-light">TP. Hồ Chí Minh</p>
-                      </div>
-                    </div>
-                    <button className="cursor-pointer text-light lg:text-[18px] border border-light rounded-3xl px-4 py-1 hover:bg-light hover:text-white">
-                      Ứng tuyển ngay
-                    </button>
-                  </div>
-                </div>
-                <div className="group rounded-3xl p-4 border border-light shadow-[0_2px_0_rgba(66,157,165,1)] flex flex-col gap-4 mb-6 bg-white">
-                  <h2>
-                    <a
-                      href=""
-                      className="group-hover:text-light hover:text-light text-[24px] lg:text-[36px] leading-9"
-                    >
-                      Account Management
-                    </a>
-                  </h2>
-                  <p>
-                    Lam Phương đang tìm kiếm một Account Management tài năng và
-                    nhiệt huyết để gia nhập đội ngũ của chúng tôi. Bạn sẽ có cơ
-                    hội làm việc trong một môi trường năng động, chuyên nghiệp
-                    và phát triển sự nghiệp.
-                  </p>
-                  <div className="flex justify-between items-center">
-                    <div className="group">
-                      <div className="flex items-center gap-2">
-                        <svg width="13" height="18">
-                          <use xlinkHref="../images/icons.svg#icon-location"></use>
-                        </svg>
-                        <p className="text-light">TP. Hồ Chí Minh</p>
-                      </div>
-                    </div>
-                    <button className="cursor-pointer text-light lg:text-[18px] border border-light rounded-3xl px-4 py-1 hover:bg-light hover:text-white">
-                      Ứng tuyển ngay
-                    </button>
-                  </div>
-                </div>
-                <div className="mt-16 px-8">
-                  <button className="flex flex-col justify-center items-center text-light text-[22px] cursor-pointer text-center mx-auto lg:mx-0">
-                    Xem thêm
-                    <ChevronDown className=" text-light" />
-                  </button>
-                </div>
+                  );
+                })}
+                {/*<div className="mt-16 px-8">*/}
+                {/*  <button className="flex flex-col justify-center items-center text-light text-[22px] cursor-pointer text-center mx-auto lg:mx-0">*/}
+                {/*    Xem thêm*/}
+                {/*    <ChevronDown className=" text-light" />*/}
+                {/*  </button>*/}
+                {/*</div>*/}
               </div>
             </div>
           </div>
