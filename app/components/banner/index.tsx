@@ -8,7 +8,6 @@ const index = () => {
   const pathname = usePathname();
   const params = new URLSearchParams(searchParams.toString());
 
-
   const onScroll = useCallback((id:string | null)=>{
     if(!id) return;
     if(id==RouterRoot.Home) return
@@ -21,6 +20,7 @@ const index = () => {
     router.push(`${pathname}?${params.toString()}`, { scroll: false });
     onScroll(RouterRoot.About);
   };
+
   return (
     <div className="banner lg:h-screen h-[465px] relative flex flex-col justify-end items-center">
       <div className="container relative z-1 px-6 lg:px-8 bottom-8 mx-auto">
