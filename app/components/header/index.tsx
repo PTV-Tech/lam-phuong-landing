@@ -96,7 +96,7 @@ const SideBar = ({ activeMenu }: { activeMenu: string }) => {
   );
 };
 
-const index = ({ base = "" }) => {
+const index = () => {
   const [scrolled, setScrolled] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string>("");
   const router = useRouter();
@@ -174,7 +174,7 @@ const index = ({ base = "" }) => {
           <div className="menu hidden md:hidden xl:block">
             <ul className="flex gap-8">
               {MENU_ITEMS.map((menu) => {
-                const url = `${base}#${menu.key}`;
+                const url = `/#${menu.key}`;
 
                 return (
                   <li key={menu.key}>
