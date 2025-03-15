@@ -9,9 +9,25 @@ const SLUG_ID = "fldEemb6XdbFKULeH";
 
 export async function GET() {
   try {
+    const locations = (await base("tblwmxQvccq7bcLu6")
+      .select({
+        view: "Grid view",
+        fields: ["fldk5qKE5puLWOXOi", "fldzfZrUAMeGdQDNh"],
+        filterByFormula: "{fldMG1ksisMbgqKHe}='Active'",
+        returnFieldsByFieldId: true,
+      })
+      .firstPage()
+      .then((data) =>
+        data.reduce(
+          (accumulator, currentValue) => ({
+            ...accumulator,
+            [currentValue.id]: currentValue.fields["fldk5qKE5puLWOXOi"],
+          }),
+          {},
+        ),
+      )) as { [key: string]: string };
     const response = await base("tblCj27rNtPggMNC2")
       .select({
-        maxRecords: 3,
         view: "Grid view",
         fields: [TITLE_ID, SUMMARY_ID, LOCATION_ID, SLUG_ID],
         returnFieldsByFieldId: true,
@@ -21,7 +37,7 @@ export async function GET() {
       return {
         title: fields[TITLE_ID],
         summary: fields[SUMMARY_ID],
-        location: fields[LOCATION_ID],
+        location: locations[fields[LOCATION_ID] as string] ?? "",
         slug: `${fields[SLUG_ID]}-${id}`,
       };
     });

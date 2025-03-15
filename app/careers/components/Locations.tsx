@@ -10,32 +10,32 @@ import Airtable from "airtable";
 
 const base = new Airtable().base(process.env.AIRTABLE_BASE_ID || "");
 
-export default async function ProductGroups() {
-  const productGroups = await base("tbl6jNelcuD3Aj0Sn")
+export default async function Locations() {
+  const locations = await base("tblwmxQvccq7bcLu6")
     .select({
       view: "Grid view",
-      fields: ["fldRMzyX3Pt15wsTa", "fldRexxvtTnj4ufwk"],
-      filterByFormula: "{fldcXJDekW9aNR1lO}='Active'",
+      fields: ["fldk5qKE5puLWOXOi", "fldzfZrUAMeGdQDNh"],
+      filterByFormula: "{fldMG1ksisMbgqKHe}='Active'",
       returnFieldsByFieldId: true,
     })
     .firstPage()
     .then(
       (data) =>
         data.map(({ fields }) => ({
-          name: fields["fldRMzyX3Pt15wsTa"],
-          slug: fields["fldRexxvtTnj4ufwk"],
+          name: fields["fldk5qKE5puLWOXOi"],
+          slug: fields["fldzfZrUAMeGdQDNh"],
         })) as { name: string; slug: string }[],
     );
 
   return (
-    <AccordionItem value="productGroups">
+    <AccordionItem value="locations">
       <AccordionTrigger className="flex justify-between cursor-pointer text-light lg:text-[30px] text-[25px] mb-5 items-center w-full [&[data-state=open]>svg]:rotate-90">
-        Nhóm sản phẩm
+        Địa điểm
         <ChevronRight className="h-6 w-6 shrink-0 text-light transition-transform duration-200" />
       </AccordionTrigger>
-      {productGroups?.length > 0 && (
+      {locations?.length > 0 && (
         <AccordionContent className="pb-5 px-3">
-          {productGroups.map((item) => {
+          {locations.map((item) => {
             return (
               <div
                 key={item.slug}

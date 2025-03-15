@@ -1,6 +1,5 @@
 import Header from "../components/header";
 import Footer from "../components/footer";
-import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import SubscribeSection from "./components/SubscribeSection";
 import { CareerListItem } from "@/type";
@@ -64,12 +63,12 @@ export default async function Page() {
                     </div>
                   );
                 })}
-                <div className="mt-16 px-8">
-                  <button className="flex flex-col justify-center items-center text-light text-[22px] cursor-pointer text-center mx-auto lg:mx-0">
-                    Xem thêm
-                    <ChevronDown className=" text-light" />
-                  </button>
-                </div>
+                {/*<div className="mt-16 px-8">*/}
+                {/*  <button className="flex flex-col justify-center items-center text-light text-[22px] cursor-pointer text-center mx-auto lg:mx-0">*/}
+                {/*    Xem thêm*/}
+                {/*    <ChevronDown className=" text-light" />*/}
+                {/*  </button>*/}
+                {/*</div>*/}
               </div>
             </div>
           </div>

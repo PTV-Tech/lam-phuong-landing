@@ -1,14 +1,8 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@radix-ui/react-accordion";
-import { ChevronRight } from "lucide-react";
-import Airtable from "airtable";
-import JobTypes from "@/app/careers/components/JobTypes";
-import JobCategories from "@/app/careers/components/JobCategories";
-import ProductGroups from "@/app/careers/components/ProductGroups";
+import { Accordion } from "@radix-ui/react-accordion";
+import JobTypes from "./JobTypes";
+import JobCategories from "./JobCategories";
+import ProductGroups from "./ProductGroups";
+import Locations from "./Locations";
 
 export default async function Filter() {
   return (
@@ -17,6 +11,8 @@ export default async function Filter() {
         <JobTypes />
 
         <JobCategories />
+
+        <Locations />
 
         <ProductGroups />
       </Accordion>
