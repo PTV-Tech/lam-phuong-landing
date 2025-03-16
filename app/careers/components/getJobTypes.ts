@@ -4,11 +4,11 @@ import Airtable from "airtable";
 
 const base = new Airtable().base(process.env.AIRTABLE_BASE_ID || "");
 
-export const fetchJobTypes = async () => {
+export const getJobTypes = async () => {
   return base("tblgnTej3UhGhdXiT")
     .select({
       view: "Grid view",
-      fields: ["fldrDEZjBskgGXFem", "fld39H9OxaPXAVXl9"],
+      fields: ["fldrDEZjBskgGXFem"],
       filterByFormula: "{flde2VaMA29XeJVUe}='Active'",
       returnFieldsByFieldId: true,
     })
@@ -17,7 +17,6 @@ export const fetchJobTypes = async () => {
       (data) =>
         data.map(({ fields, id }) => ({
           name: fields["fldrDEZjBskgGXFem"],
-          slug: `${fields["fld39H9OxaPXAVXl9"]}-${id}`,
-        })) as { name: string; slug: string }[],
+        })) as { name: string }[],
     );
 };

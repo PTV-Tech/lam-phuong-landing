@@ -8,21 +8,21 @@ import {
 import { ChevronRight } from "lucide-react";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { fetchJobTypes } from "@/app/careers/components/test";
+import { getJobTypes } from "./getJobTypes";
 
 export default function JobTypes() {
-  const [jobTypes, setJobTypes] = useState<any[]>([]);
+  const [jobTypes, setJobTypes] = useState<{ name: string }[]>([]);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetchJobTypes();
+      const response = await getJobTypes();
       setJobTypes(response);
     };
 
-    fetchData();
+    fetchData().then();
   }, []);
 
   const createQueryString = useCallback(
@@ -45,9 +45,9 @@ export default function JobTypes() {
   );
 
   const handleClick = useCallback(
-    (slug: string) => (event: ChangeEvent<HTMLInputElement>) => {
+    (name: string) => (event: ChangeEvent<HTMLInputElement>) => {
       const shouldAdd = event.target.checked;
-      const newQueryString = createQueryString("job_types", slug, shouldAdd);
+      const newQueryString = createQueryString("job_types", name, shouldAdd);
       router.push(`${pathname}?${newQueryString}`);
     },
     [router, pathname, createQueryString],
@@ -61,22 +61,22 @@ export default function JobTypes() {
       </AccordionTrigger>
       {jobTypes?.length > 0 && (
         <AccordionContent className="pb-5 px-3">
-          {jobTypes.map((item) => {
-            const checked = searchParams.get("job_types")?.includes(item.slug);
+          {jobTypes.map(({ name }) => {
+            const checked = searchParams.get("job_types")?.includes(name);
 
             return (
               <div
-                key={item.slug}
+                key={name}
                 className="flex items-center space-x-2 text-[18px] mb-3"
               >
                 <input
-                  id={item.slug}
+                  id={name}
                   type="checkbox"
                   className="h-[20px] w-[20px]"
-                  onChange={handleClick(item.slug)}
+                  onChange={handleClick(name)}
                   checked={checked}
                 />
-                <label htmlFor={item.slug}>{item.name}</label>
+                <label htmlFor={name}>{name}</label>
               </div>
             );
           })}

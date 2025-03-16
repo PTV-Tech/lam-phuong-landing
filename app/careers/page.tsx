@@ -8,11 +8,17 @@ import Filter from "./components/Filter";
 export const metadata = {
   title: "Tuyển dụng",
 };
-
 export const dynamic = "force-dynamic";
-export default async function Page() {
+
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const _searchParams = await searchParams;
+  const searchParamsString = new URLSearchParams(_searchParams as any).toString()
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_SITE_URL}/api/careers`,
+    `${process.env.NEXT_PUBLIC_SITE_URL}/api/careers?${searchParamsString}`,
   );
   const data = (await response.json()) as CareerListItem[];
 
