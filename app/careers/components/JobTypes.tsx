@@ -1,4 +1,4 @@
-"use server";
+"use client";
 
 import {
   AccordionContent,
@@ -6,26 +6,52 @@ import {
   AccordionTrigger,
 } from "@radix-ui/react-accordion";
 import { ChevronRight } from "lucide-react";
-import Airtable from "airtable";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { fetchJobTypes } from "@/app/careers/components/test";
 
-const base = new Airtable().base(process.env.AIRTABLE_BASE_ID || "");
+export default function JobTypes() {
+  const [jobTypes, setJobTypes] = useState<any[]>([]);
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-export default async function JobTypes() {
-  const jobTypes = await base("tblgnTej3UhGhdXiT")
-    .select({
-      view: "Grid view",
-      fields: ["fldrDEZjBskgGXFem", "fld39H9OxaPXAVXl9"],
-      filterByFormula: "{flde2VaMA29XeJVUe}='Active'",
-      returnFieldsByFieldId: true,
-    })
-    .firstPage()
-    .then(
-      (data) =>
-        data.map(({ fields }) => ({
-          name: fields["fldrDEZjBskgGXFem"],
-          slug: fields["fld39H9OxaPXAVXl9"],
-        })) as { name: string; slug: string }[],
-    );
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetchJobTypes();
+      setJobTypes(response);
+    };
+
+    fetchData();
+  }, []);
+
+  const createQueryString = useCallback(
+    (name: string, value: string, shouldAdd = true) => {
+      const currentValues = searchParams.get(name) || "";
+      const currentValuesArr = currentValues
+        .split("|")
+        .filter((item) => !!item);
+      let newValuesArr = [];
+      if (shouldAdd) {
+        newValuesArr = [...currentValuesArr, value];
+      } else {
+        newValuesArr = currentValuesArr.filter((item) => item !== value);
+      }
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, newValuesArr.join("|"));
+      return params.toString();
+    },
+    [searchParams],
+  );
+
+  const handleClick = useCallback(
+    (slug: string) => (event: ChangeEvent<HTMLInputElement>) => {
+      const shouldAdd = event.target.checked;
+      const newQueryString = createQueryString("job_types", slug, shouldAdd);
+      router.push(`${pathname}?${newQueryString}`);
+    },
+    [router, pathname, createQueryString],
+  );
 
   return (
     <AccordionItem value="jobTypes">
@@ -36,13 +62,21 @@ export default async function JobTypes() {
       {jobTypes?.length > 0 && (
         <AccordionContent className="pb-5 px-3">
           {jobTypes.map((item) => {
+            const checked = searchParams.get("job_types")?.includes(item.slug);
+
             return (
               <div
                 key={item.slug}
                 className="flex items-center space-x-2 text-[18px] mb-3"
               >
-                <input type="checkbox" className="h-[20px] w-[20px]" />
-                <label htmlFor="terms">{item.name}</label>
+                <input
+                  id={item.slug}
+                  type="checkbox"
+                  className="h-[20px] w-[20px]"
+                  onChange={handleClick(item.slug)}
+                  checked={checked}
+                />
+                <label htmlFor={item.slug}>{item.name}</label>
               </div>
             );
           })}

@@ -1,0 +1,23 @@
+"use server";
+
+import Airtable from "airtable";
+
+const base = new Airtable().base(process.env.AIRTABLE_BASE_ID || "");
+
+export const fetchJobTypes = async () => {
+  return base("tblgnTej3UhGhdXiT")
+    .select({
+      view: "Grid view",
+      fields: ["fldrDEZjBskgGXFem", "fld39H9OxaPXAVXl9"],
+      filterByFormula: "{flde2VaMA29XeJVUe}='Active'",
+      returnFieldsByFieldId: true,
+    })
+    .firstPage()
+    .then(
+      (data) =>
+        data.map(({ fields, id }) => ({
+          name: fields["fldrDEZjBskgGXFem"],
+          slug: `${fields["fld39H9OxaPXAVXl9"]}-${id}`,
+        })) as { name: string; slug: string }[],
+    );
+};
