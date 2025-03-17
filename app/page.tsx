@@ -1,6 +1,5 @@
 "use client";
-import {Fragment, Suspense, useEffect} from "react";
-import Header from "./components/header";
+import { Suspense, useEffect } from "react";
 import Banner from "./components/banner";
 import About from "./components//about";
 import Services from "./components/services";
@@ -8,13 +7,11 @@ import Parallax from "./components/parallax";
 import Studies from "./components/studies";
 import Careers from "./components/careers";
 import Partners from "./components/partners";
-import Footer from "./components/footer";
 import { RouterRoot } from "@/app/contants";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
 const page = () => {
-  
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -23,41 +20,35 @@ const page = () => {
   }, []);
 
   return (
-    <Fragment>
-      <Header />
+    <main>
+      <section id={RouterRoot.Home} className="section">
+        <Suspense>
+          <Banner />
+        </Suspense>
+      </section>
 
-      <main>
-        <section id={RouterRoot.Home} className="section">
-          <Suspense>
-            <Banner />
-          </Suspense>
-        </section>
+      <section id={RouterRoot.About} className="section">
+        <About />
+      </section>
 
-        <section id={RouterRoot.About} className="section">
-          <About />
-        </section>
+      <section id={RouterRoot.Service} className="section">
+        <Services />
+      </section>
 
-        <section id={RouterRoot.Service} className="section">
-          <Services />
-        </section>
+      <Parallax />
 
-        <Parallax />
+      <section id={RouterRoot.Studies} className="section">
+        <Studies />
+      </section>
 
-        <section id={RouterRoot.Studies} className="section">
-          <Studies />
-        </section>
+      <section id={RouterRoot.Career} className="section">
+        <Careers />
+      </section>
 
-        <section id={RouterRoot.Career} className="section">
-          <Careers />
-        </section>
-
-        <section id={RouterRoot.Partner} className="section">
-          <Partners />
-        </section>
-      </main>
-
-      <Footer />
-    </Fragment>
+      <section id={RouterRoot.Partner} className="section">
+        <Partners />
+      </section>
+    </main>
   );
 };
 

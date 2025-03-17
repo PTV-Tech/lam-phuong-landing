@@ -1,4 +1,4 @@
-import ClientView from "./ClientView";
+import ClientView from "./components/ClientView";
 import { GetRecordsResponse, JobFields, LocationFields } from "@/type";
 
 const BASE_URL = `https://api.airtable.com/v0/${process.env.BASE_ID}`;

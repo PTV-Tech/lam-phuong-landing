@@ -29,6 +29,10 @@ export interface LocationFields extends FieldSet {
   Name: string;
 }
 
+export interface FilterFields extends FieldSet {
+  Name: string;
+}
+
 export type GetRecordsResponse<T extends FieldSet> = {
   records: Records<T>;
   offset: string;
