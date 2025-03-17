@@ -75,7 +75,7 @@ export default function FilterBase({ filterKey }: FilterBaseProps) {
       </AccordionTrigger>
       <AccordionContent className="pb-5 px-3">
         {data.map(({ name }) => {
-          const checked = searchParams
+          const checked = !!searchParams
             .get(CONFIG_BY_KEY[filterKey].key)
             ?.includes(name);
 
@@ -88,8 +88,8 @@ export default function FilterBase({ filterKey }: FilterBaseProps) {
                 id={name}
                 type="checkbox"
                 className="h-[20px] w-[20px]"
-                // onChange={handleClick(name)}
-                // checked={checked}
+                onChange={handleClick(name)}
+                checked={checked}
               />
               <label htmlFor={name}>{name}</label>
             </div>
