@@ -44,7 +44,10 @@ export default function ClientView({
       <Header />
 
       <main className="pt-[116px]">
-        <div className="container mx-auto px-6 lg:px-0 relative">
+        <div
+          className="container mx-auto px-6 lg:px-0 relative"
+          data-aos="fade-up"
+        >
           <div className="lg:max-w-6xl mx-auto lg:py-16 py-5 relative">
             <Image
               className="w-full"
