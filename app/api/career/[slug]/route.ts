@@ -39,6 +39,7 @@ export async function GET(
       },
     );
   } catch (e) {
+    console.log("=>(route.ts:43) e", e);
     return new Response(JSON.stringify(null), {
       status: 404,
       headers: { "Content-Type": "application/json" },

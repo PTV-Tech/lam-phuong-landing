@@ -14,15 +14,15 @@ export default async function Page({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await params;
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_SITE_URL}/api/career/${slug}`,
-  );
-  const data = await response.json();
-  console.log("=>(page.tsx:20) data", data.description);
-  if (!data) {
-    return <Fragment />;
-  }
+  // const { slug } = await params;
+  // const response = await fetch(
+  //   `${process.env.NEXT_PUBLIC_SITE_URL}/api/career/${slug}`,
+  // );
+  // const data = await response.json();
+  //
+  // if (!data) {
+  //   return <Fragment />;
+  // }
 
   return (
     <>
@@ -36,11 +36,11 @@ export default async function Page({
               </div>
               <div className="col-span-2 flex flex-col gap-8">
                 <h2 className="text-light hover:text-light text-[24px] lg:text-[36px] leading-9">
-                  {data.title}
+                 Bài vieết
                 </h2>
                 <div className="flex justify-between items-center">
                   <div className="group flex items-cente gap-2">
-                    {data.tags.map((tag: string, index: number) => (
+                    {["tag 1", "tag 1", "tag 1", "tag 1", "tag 1", "tag 1", "tag 1 tag 2", "tag 1", "tag 1 tag 2"].map((tag: string, index: number) => (
                       <span
                         key={index}
                         className="text-light border border-light rounded-3xl px-3 py-1"
@@ -54,12 +54,12 @@ export default async function Page({
                       <svg width="13" height="18">
                         <use xlinkHref="../../images/icons.svg#icon-location"></use>
                       </svg>
-                      <p className="text-light">{data.location}</p>
+                      <p className="text-light">Hồ Chí Minh</p>
                     </div>
                   </div>
                 </div>
                 <div className="mb-4 [&>h3]:text-light [&>h3]:text-[22px] [&>h3]:mb-3 [&>ul]:list-disc [&>ul]:flex [&>ul]:flex-col [&>ul]:gap-3 [&>ul]:pl-5 [&>ul]:mb-5">
-                  <Markdown>{data.description}</Markdown>
+                  {/*<Markdown>{data.description}</Markdown>*/}
                   {/*<h4 className="text-light text-[22px] mb-3">*/}
                   {/*  Mô tả công việc*/}
                   {/*</h4>*/}
