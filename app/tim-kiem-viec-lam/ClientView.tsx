@@ -2,10 +2,12 @@
 
 import { Fragment, useState } from "react";
 import Header from "@/app/components/header";
-import SubscribeSection from "@/app/careers/components/SubscribeSection";
+import SubscribeSection from "./SubscribeSection";
 import Link from "next/link";
 import Footer from "@/app/components/footer";
 import { ChevronDown } from "lucide-react";
+import Banner from "@/public/images/banner-page.png";
+import Image from "next/image";
 
 type ClientViewProps = {
   offset: string | null;
@@ -27,10 +29,9 @@ export default function ClientView({
       const res = await fetch(
         `/api/jobs?offset=${encodeURIComponent(offset)}`,
         {},
-      );
-      const data = await res.json();
-      setRecords((prev) => [...prev, ...data.jobs]);
-      setOffset(data.offset || null);
+      ).then((res) => res.json());
+      setRecords((prev) => [...prev, ...res.data]);
+      setOffset(res.offset || null);
     } catch (error) {
       console.error("Error fetching more records:", error);
     } finally {
@@ -41,10 +42,18 @@ export default function ClientView({
   return (
     <Fragment>
       <Header />
-      <main className="carrers pt-[116px]">
+
+      <main className="pt-[116px]">
         <div className="container mx-auto px-6 lg:px-0 relative">
           <div className="lg:max-w-6xl mx-auto lg:py-16 py-5 relative">
-            <img src="../images/banner-page.png" alt="" className="w-full" />
+            <Image
+              className="w-full"
+              src={Banner}
+              alt="Banner image"
+              width={1260}
+              height={540}
+            />
+
             <div className="flex flex-col lg:grid lg:grid-cols-3 gap-8 mt-5 lg:mt-16">
               <div className="col-span-1">
                 {/*<Filter />*/}
@@ -70,7 +79,7 @@ export default function ClientView({
                           {!!item.location && (
                             <div className="flex items-center gap-2">
                               <svg width="13" height="18">
-                                <use xlinkHref="../images/icons.svg#icon-location"></use>
+                                <use xlinkHref="../images/icons.svg#icon-location" />
                               </svg>
                               <p className="text-light">{item.location}</p>
                             </div>
@@ -98,6 +107,7 @@ export default function ClientView({
           </div>
         </div>
       </main>
+
       <Footer />
     </Fragment>
   );
