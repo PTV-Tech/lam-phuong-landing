@@ -4,48 +4,24 @@ import { usePathname, useRouter } from "next/navigation";
 import { Fragment, useEffect, useState } from "react";
 import { clsx } from "clsx";
 import Link from "next/link";
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
-gsap.registerPlugin(useGSAP)
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+gsap.registerPlugin(useGSAP);
 
 const MENU_ITEMS = [
-  {
-    label: "HOME",
-    key: RouterRoot.Home,
-  },
-  {
-    label: "ABOUT",
-    key: RouterRoot.About,
-  },
-  {
-    label: "OUR SERVICES",
-    key: RouterRoot.Service,
-  },
-
-  {
-    label: "CASE STUDIES",
-    key: RouterRoot.Studies,
-  },
-  {
-    label: "CAREERS",
-    key: RouterRoot.Career,
-  },
-  {
-    label: "OUR PARTNERS",
-    key: RouterRoot.Partner,
-  },
+  { label: "HOME", key: RouterRoot.Home },
+  { label: "ABOUT", key: RouterRoot.About },
+  { label: "OUR SERVICES", key: RouterRoot.Service },
+  { label: "CASE STUDIES", key: RouterRoot.Studies },
+  { label: "CAREERS", key: RouterRoot.Career },
+  { label: "OUR PARTNERS", key: RouterRoot.Partner },
 ];
 
 const SideBar = ({ activeMenu }: { activeMenu: string }) => {
   const [showSideBar, setShowSideBar] = useState(false);
 
-  const openSideBar = () => {
-    setShowSideBar(true);
-  };
-
-  const closeSideBar = () => {
-    setShowSideBar(false);
-  };
+  const openSideBar = () => setShowSideBar(true);
+  const closeSideBar = () => setShowSideBar(false);
 
   return (
     <Fragment>
@@ -76,7 +52,25 @@ const SideBar = ({ activeMenu }: { activeMenu: string }) => {
                 <li key={menu.key} className="py-5">
                   <Link
                     href={url}
-                    scroll
+                    scroll={false}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      const targetId = menu.key;
+                      const targetElement = document.getElementById(targetId);
+                      const headerHeight =
+                        document.querySelector("header")?.offsetHeight || 0;
+
+                      if (targetElement) {
+                        const targetPosition =
+                          targetElement.offsetTop - headerHeight - 10;
+                        window.scrollTo({
+                          top: targetPosition,
+                          behavior: "smooth",
+                        });
+                      }
+
+                      setShowSideBar(false);
+                    }}
                     className={clsx(
                       "text-primary rounded-3xl cursor-pointer transition px-5",
                       {
@@ -84,7 +78,7 @@ const SideBar = ({ activeMenu }: { activeMenu: string }) => {
                           activeMenu === url &&
                           activeMenu !== `#${RouterRoot.Home}`,
                         "hover:bg-primary hover:text-white": activeMenu !== url,
-                      },
+                      }
                     )}
                   >
                     {menu.label}
@@ -99,7 +93,7 @@ const SideBar = ({ activeMenu }: { activeMenu: string }) => {
   );
 };
 
-const index = ({ base = "" }) => {
+const Navbar = ({ base = "" }) => {
   const [scrolled, setScrolled] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string>("");
   const router = useRouter();
@@ -108,76 +102,54 @@ const index = ({ base = "" }) => {
   useGSAP(() => {
     gsap.fromTo(
       ".link-menu",
-      { 
-        visibility: "visible",
-        opacity: 0,
-        y: 50,
-      },
+      { visibility: "visible", opacity: 0, y: 50 },
       {
         opacity: 1,
         y: 0,
         duration: 0.75,
         ease: "power2.out",
         delay: 0.5,
-        stagger: (index) => 0.25 * index,
+        stagger: (i) => 0.25 * i,
       }
     );
   }, []);
 
   useEffect(() => {
+    const headerHeight = document.querySelector("header")?.offsetHeight || 0;
     const sections = document.querySelectorAll("section.section");
-    const options = {
-      threshold: 0.9,
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) {
-          return;
-        }
-        const id = entry.target.id;
-        setActiveMenu(`#${id}`);
-        if (id === RouterRoot.Home) {
-          router.replace(pathname, { scroll: false });
-          return;
-        }
-        router.push(`${pathname}#${id}`, { scroll: false });
-      });
-    }, options);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            setActiveMenu(`#${id}`);
+            if (id === RouterRoot.Home) {
+              router.replace(pathname, { scroll: false });
+              return;
+            }
+            router.push(`${pathname}#${id}`, { scroll: false });
+          }
+        });
+      },
+      { threshold: 0.7, rootMargin: `-${headerHeight}px 0px 0px 0px` }
+    );
 
     sections.forEach((section) => observer.observe(section));
 
-    return () => {
-      if (observer) {
-        observer.disconnect();
-      }
-    };
+    return () => observer.disconnect();
   }, [pathname, router]);
+
   useEffect(() => {
-    if (!window) {
-      return;
-    }
-    setActiveMenu(window.location.hash);
-    if (window.scrollY > 70) {
-      setScrolled(true);
-      return;
+    if (typeof window !== "undefined") {
+      setActiveMenu(window.location.hash);
+      setScrolled(window.scrollY > 70);
     }
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 70) {
-        setScrolled(true);
-        return;
-      }
-      setScrolled(false);
-    };
-
+    const handleScroll = () => setScrolled(window.scrollY > 70);
     window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -202,7 +174,23 @@ const index = ({ base = "" }) => {
                   <li key={menu.key}>
                     <Link
                       href={url}
-                      scroll
+                      scroll={false}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const targetId = menu.key;
+                        const targetElement = document.getElementById(targetId);
+                        const headerHeight =
+                          document.querySelector("header")?.offsetHeight || 0;
+
+                        if (targetElement) {
+                          const targetPosition =
+                            targetElement.offsetTop - headerHeight - 10;
+                          window.scrollTo({
+                            top: targetPosition,
+                            behavior: "smooth",
+                          });
+                        }
+                      }}
                       className={clsx(
                         "text-primary px-5 py-2 rounded-3xl cursor-pointer transition link-menu",
                         {
@@ -211,7 +199,7 @@ const index = ({ base = "" }) => {
                             activeMenu !== `#${RouterRoot.Home}`,
                           "hover:bg-primary hover:text-white":
                             activeMenu !== url,
-                        },
+                        }
                       )}
                     >
                       {menu.label}
@@ -221,7 +209,6 @@ const index = ({ base = "" }) => {
               })}
             </ul>
           </div>
-
           <SideBar activeMenu={activeMenu} />
         </div>
       </div>
@@ -229,4 +216,4 @@ const index = ({ base = "" }) => {
   );
 };
 
-export default index;
+export default Navbar;

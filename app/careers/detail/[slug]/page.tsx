@@ -39,7 +39,7 @@ export default async function Page({
                  Bài vieết
                 </h2>
                 <div className="flex justify-between items-center">
-                  <div className="group flex items-cente gap-2">
+                  <div className="group flex items-center gap-2 flex-wrap">
                     {["tag 1", "tag 1", "tag 1", "tag 1", "tag 1", "tag 1", "tag 1 tag 2", "tag 1", "tag 1 tag 2"].map((tag: string, index: number) => (
                       <span
                         key={index}
@@ -49,7 +49,7 @@ export default async function Page({
                       </span>
                     ))}
                   </div>
-                  <div className="group">
+                  <div className="group min-w-[150px]">
                     <div className="flex items-center gap-2">
                       <svg width="13" height="18">
                         <use xlinkHref="../../images/icons.svg#icon-location"></use>
