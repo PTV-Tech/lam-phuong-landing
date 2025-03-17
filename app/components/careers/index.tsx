@@ -5,7 +5,7 @@ import Link from "next/link";
 const index = () => {
   return (
     <div id={RouterRoot.Career} className="pt-10 relative">
-      <div className="container mx-auto px-8 lg:px-0">
+      <div className="container mx-auto px-8 lg:px-0" data-aos="fade-up">
         <div className="lg:max-w-6xl mx-auto">
           <div className="grid grid-cols-4 items-center">
             <h3 className="mb-5 lg:text-[48px] text-[32px] font-bold col-span-2 lg:col-span-1 uppercase">

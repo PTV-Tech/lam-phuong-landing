@@ -3,8 +3,8 @@ import React from 'react'
 const index = () => {
   return (
     <footer className="relative">
-      <div className="container lg:py-16 mx-auto px-8">
-        <div className="border-t-5 border-light pt-8">
+      <div className="container mx-auto px-8 mt-8 lg:mt-0">
+        <div className="border-t-5 border-light py-8">
           <img src="../images/logo.png" alt="" className="w-[160px] xl:w-[260px]" />
           <div className="flex flex-col lg:grid lg:grid-cols-3 gap-4 lg:gap-8 mt-10">
               <div className="max-w-64">

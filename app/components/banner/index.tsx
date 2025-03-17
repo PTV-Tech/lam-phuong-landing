@@ -1,6 +1,9 @@
 import { RouterRoot } from "@/app/contants";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+gsap.registerPlugin(useGSAP)
 
 const index = () => {
   const router = useRouter();
@@ -21,6 +24,48 @@ const index = () => {
     onScroll(RouterRoot.About);
   };
 
+  useGSAP(() => {
+    gsap.fromTo(
+      ".heading h2, .button-link",
+      { 
+        visibility: "visible",
+        opacity: 0,
+        y: 50,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.75,
+        ease: "power2.out",
+        delay: 0.5,
+        stagger: (index) => 0.25 * index,
+      }
+    );
+  }, []);
+
+  const arrowRef = useRef(null);
+
+  useEffect(() => {
+    const tl = gsap.timeline({ repeat: -1, yoyo: true });
+    gsap.to(arrowRef.current, {
+      filter: "drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.8))",
+      duration: 1,
+      repeat: -1,
+      yoyo: true,
+      ease: "power1.inOut",
+    });
+    tl.to(arrowRef.current, {
+      x: 10,
+      duration: 1.5,
+      ease: "power2.inOut",
+    }).to(arrowRef.current, {
+      x: 0,
+      duration: 1.5,
+      ease: "power2.inOut",
+    });
+
+  }, []);
+
   return (
     <div className="banner lg:h-screen h-[465px] relative flex flex-col justify-end items-center">
       <div className="container relative z-1 px-6 lg:px-8 bottom-8 mx-auto">
@@ -33,8 +78,8 @@ const index = () => {
               make it <span className="text-primary">memorable.</span>
             </h2>
           </div>
-          <button className="button cursor-pointer" onClick={handleScroll}>
-            <svg width="70" height="22">
+          <button className="button cursor-pointer button-link" onClick={handleScroll}>
+            <svg ref={arrowRef} width="70" height="22">
               <use xlinkHref="../images/icons.svg#icon-arrow"></use>
             </svg>
           </button>

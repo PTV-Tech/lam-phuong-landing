@@ -25,7 +25,7 @@ export default async function Page() {
     <>
       <Header base="/" />
       <main className="carrers pt-[116px]">
-        <div className="container mx-auto px-6 lg:px-0 relative">
+        <div className="container mx-auto px-6 lg:px-0 relative" data-aos="fade-up">
           <div className="lg:max-w-6xl mx-auto lg:py-16 py-5 relative">
             <img src="../images/banner-page.png" alt="" className="w-full" />
             <div className="flex flex-col lg:grid lg:grid-cols-3 gap-8 mt-5 lg:mt-16">

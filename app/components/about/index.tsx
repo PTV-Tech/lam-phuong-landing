@@ -5,7 +5,7 @@ import React, { RefObject } from 'react'
 const index =() => {
   return (
     <div id={RouterRoot.About} className="relative about">
-      <div className="container px-6 lg:px-8 mx-auto">
+      <div className="container px-6 lg:px-8 mx-auto" data-aos="fade-up">
         <div className="block lg:grid grid-cols-3 py-10 lg:py-32 lg:max-w-6xl mx-auto gap-10">
             <img src="../images/logo-3d.png" alt="" className="w-[185px] lg:w-[340px] mb-4 lg:mb-0" />
             <div className="col-span-2 flex flex-col gap-4 justify-center">

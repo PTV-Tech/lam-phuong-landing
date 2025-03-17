@@ -4,7 +4,7 @@ import React,{RefObject} from "react";
 const index = () => {
   return (
     <div id={RouterRoot.Partner} className="relative py-8 lg:pb-20">
-        <div className="container mx-auto px-8 pr-0 lg:px-0">
+        <div className="container mx-auto px-8 pr-0 lg:px-0" data-aos="fade-up">
             <div className="lg:max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-3 grid-cols-4 items-center">
                 <h3 className="mb-5 lg:text-[48px] text-[32px] font-bold col-span-3 lg:col-span-1 uppercase">
@@ -14,7 +14,7 @@ const index = () => {
             </div>
             </div>
         </div>
-        <div className="container mx-auto px-8 lg:px-0">
+        <div className="container mx-auto px-8 lg:px-0" data-aos="fade-up">
             <div className="lg:max-w-6xl mx-auto">
             <div className="flex flex-col lg:grid lg:grid-cols-3 items-start gap-14">
             <div className="col-span-1">

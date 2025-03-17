@@ -4,6 +4,9 @@ import { usePathname, useRouter } from "next/navigation";
 import { Fragment, useEffect, useState } from "react";
 import { clsx } from "clsx";
 import Link from "next/link";
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+gsap.registerPlugin(useGSAP)
 
 const MENU_ITEMS = [
   {
@@ -50,7 +53,7 @@ const SideBar = ({ activeMenu }: { activeMenu: string }) => {
         <use xlinkHref="../images/icons.svg#icon-navbar"></use>
       </svg>
       {showSideBar && (
-        <div className="fixed top-0 left-0 w-full h-screen bg-white p-8">
+        <div className="fixed top-0 left-0 w-full h-screen bg-white p-8 mobile-bar">
           <div className="flex justify-between items-center mb-5">
             <img
               src="../images/logo.png"
@@ -75,7 +78,7 @@ const SideBar = ({ activeMenu }: { activeMenu: string }) => {
                     href={url}
                     scroll
                     className={clsx(
-                      "text-primary rounded-3xl cursor-pointer transition",
+                      "text-primary rounded-3xl cursor-pointer transition px-5",
                       {
                         "bg-primary text-white":
                           activeMenu === url &&
@@ -101,6 +104,25 @@ const index = ({ base = "" }) => {
   const [activeMenu, setActiveMenu] = useState<string>("");
   const router = useRouter();
   const pathname = usePathname();
+
+  useGSAP(() => {
+    gsap.fromTo(
+      ".link-menu",
+      { 
+        visibility: "visible",
+        opacity: 0,
+        y: 50,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.75,
+        ease: "power2.out",
+        delay: 0.5,
+        stagger: (index) => 0.25 * index,
+      }
+    );
+  }, []);
 
   useEffect(() => {
     const sections = document.querySelectorAll("section.section");
@@ -169,7 +191,7 @@ const index = ({ base = "" }) => {
           <img
             src="../images/logo.png"
             alt=""
-            className="w-[160px] xl:w-[260px]"
+            className="w-[160px] xl:w-[260px] link-menu"
           />
           <div className="menu hidden md:hidden xl:block">
             <ul className="flex gap-8">
@@ -182,7 +204,7 @@ const index = ({ base = "" }) => {
                       href={url}
                       scroll
                       className={clsx(
-                        "text-primary px-5 py-2 rounded-3xl cursor-pointer transition",
+                        "text-primary px-5 py-2 rounded-3xl cursor-pointer transition link-menu",
                         {
                           "bg-primary text-white":
                             activeMenu === url &&
