@@ -1,5 +1,5 @@
 "use client";
-import {Fragment, Suspense} from "react";
+import {Fragment, Suspense, useEffect} from "react";
 import Header from "./components/header";
 import Banner from "./components/banner";
 import About from "./components//about";
@@ -10,8 +10,18 @@ import Careers from "./components/careers";
 import Partners from "./components/partners";
 import Footer from "./components/footer";
 import { RouterRoot } from "@/app/contants";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const page = () => {
+  
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+  }, []);
+
   return (
     <Fragment>
       <Header />

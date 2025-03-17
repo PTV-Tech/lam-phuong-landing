@@ -7,7 +7,7 @@ import { RouterRoot } from "@/app/contants";
 
 const index = () => {
   return (
-    <div id={RouterRoot.Studies} className="py-10 relative">
+    <div id={RouterRoot.Studies} className="py-10 relative" data-aos="fade-up">
         <div className="absolute top-0 left-0 w-full">
             <img src="../images/bg-vector.svg" alt="" className="w-full h-[150px] object-cover" />
         </div>
