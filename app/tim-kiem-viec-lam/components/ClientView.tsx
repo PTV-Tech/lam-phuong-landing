@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import SubscribeSection from "./SubscribeSection";
 import { ChevronDown } from "lucide-react";
 import Banner from "@/public/images/banner-page.png";
@@ -10,11 +10,13 @@ import Filter from "./Filter";
 type ClientViewProps = {
   offset: string | null;
   data: { title: string; summary: string; location: string; slug: string }[];
+  filterByFormula: string;
 };
 
 export default function ClientView({
   offset: initialOffset,
   data,
+  filterByFormula,
 }: ClientViewProps) {
   const [records, setRecords] =
     useState<
@@ -23,6 +25,14 @@ export default function ClientView({
   const [offset, setOffset] = useState<string | null>(initialOffset);
   const [, setLoading] = useState<boolean>(false);
 
+  useEffect(() => {
+    setOffset(initialOffset);
+  }, [initialOffset]);
+
+  useEffect(() => {
+    setRecords(data);
+  }, [data])
+
   const loadMore = async () => {
     if (!offset) {
       return;
@@ -30,7 +40,7 @@ export default function ClientView({
     setLoading(true);
     try {
       const res = await fetch(
-        `/api/jobs?offset=${encodeURIComponent(offset)}`,
+        `/api/jobs?offset=${encodeURIComponent(offset)}&filterByFormula=${filterByFormula}`,
         {},
       ).then((res) => res.json());
       setRecords((prev) => [...prev, ...res.data]);

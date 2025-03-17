@@ -90,5 +90,11 @@ export default async function Page({
     slug: `${fields["Slug"]}-${id}`,
   }));
 
-  return <ClientView data={data} offset={response.offset} />;
+  return (
+    <ClientView
+      data={data}
+      offset={response.offset}
+      filterByFormula={encodeURIComponent(getSearchParams())}
+    />
+  );
 }
