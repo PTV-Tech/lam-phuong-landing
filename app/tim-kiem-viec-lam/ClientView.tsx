@@ -18,7 +18,10 @@ export default function ClientView({
   offset: initialOffset,
   data,
 }: ClientViewProps) {
-  const [records, setRecords] = useState<any[]>(data);
+  const [records, setRecords] =
+    useState<
+      { title: string; summary: string; location: string; slug: string }[]
+    >(data);
   const [offset, setOffset] = useState<string | null>(initialOffset);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -65,7 +68,7 @@ export default function ClientView({
               </div>
 
               <div className="col-span-2 relative z-1">
-                {records.map((item) => {
+                {records.map(({ slug, title, summary }) => {
                   return (
                     <div
                       key={item.slug}
