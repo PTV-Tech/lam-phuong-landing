@@ -17,7 +17,7 @@ export async function GET() {
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
-    console.log("=>(route.ts:20) error", error);
+    console.log("=>(route.ts:202) error", error);
     return new Response(JSON.stringify([]), {
       status: 200,
       headers: { "Content-Type": "application/json" },
