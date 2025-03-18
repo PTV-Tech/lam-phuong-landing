@@ -1,6 +1,6 @@
 import Airtable from "airtable";
 
-const base = new Airtable().base(process.env.AIRTABLE_BASE_ID || "");
+const base = new Airtable().base(process.env.BASE_ID || "");
 
 export async function POST(request: Request) {
   const { email } = await request.json();
