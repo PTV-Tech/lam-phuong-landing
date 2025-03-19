@@ -31,8 +31,8 @@ export default async function Page({
                 <h2 className="text-light hover:text-light text-[24px] lg:text-[36px] leading-9">
                   {data.title}
                 </h2>
-                <div className="flex justify-between items-center">
-                  <div className="group flex items-center gap-2 flex-wrap">
+                <div className="lg:flex lg:justify-between lg:items-center block">
+                  <div className="group flex items-center gap-2 flex-wrap lg:mb-0 mb-4">
                     {(data.tags || []).map((tag: string, index: number) => (
                       <span
                         key={index}
