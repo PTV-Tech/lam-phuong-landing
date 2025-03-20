@@ -3,7 +3,7 @@ import { database } from "@/app/database";
 export async function POST(request: Request) {
   const { email } = await request.json();
   try {
-    await database(process.env.SUBSCRIBERS_TABLE || "").create([
+    await database("tble5saHr6dCQlOeS").create([
       {
         fields: { Email: email },
       },
@@ -19,7 +19,6 @@ export async function POST(request: Request) {
         ok: false,
         error: error.message,
         keys: Object.keys(error),
-        env: process.env.SUBSCRIBERS_TABLE,
       }),
       {
         status: 200,
