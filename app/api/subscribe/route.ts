@@ -14,6 +14,7 @@ export async function POST(request: Request) {
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
+    console.log("=>(route.ts:18) error", error);
     return new Response(JSON.stringify({ ok: false }), {
       status: 200,
       headers: { "Content-Type": "application/json" },
