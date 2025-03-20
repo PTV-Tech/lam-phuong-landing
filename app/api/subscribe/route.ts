@@ -14,9 +14,17 @@ export async function POST(request: Request) {
     });
   } catch (error: any) {
     console.log("=>(route.ts:18) error", error);
-    return new Response(JSON.stringify({ ok: false, error: error.message, keys: Object.keys(error) }), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    });
+    return new Response(
+      JSON.stringify({
+        ok: false,
+        error: error.message,
+        keys: Object.keys(error),
+        env: process.env.SUBSCRIBERS_TABLE,
+      }),
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
   }
 }
