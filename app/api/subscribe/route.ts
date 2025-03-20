@@ -1,11 +1,10 @@
 import Airtable from "airtable";
-
-const base = new Airtable().base(process.env.BASE_ID || "");
+import { database } from "@/app/database";
 
 export async function POST(request: Request) {
   const { email } = await request.json();
   try {
-    await base("Subscribers").create([
+    await database(process.env.SUBSCRIBERS_TABLE || "").create([
       {
         fields: { Email: email },
       },
