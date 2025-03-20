@@ -1,4 +1,3 @@
-import Airtable from "airtable";
 import { database } from "@/app/database";
 
 export async function POST(request: Request) {
@@ -15,7 +14,7 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     console.log("=>(route.ts:18) error", error);
-    return new Response(JSON.stringify({ ok: false }), {
+    return new Response(JSON.stringify({ ok: false, error }), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
