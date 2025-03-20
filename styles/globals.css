@@ -148,7 +148,7 @@
     @apply bg-linear-to-r from-[#429fa8] to-[#54c2cc] rounded-3xl px-8 py-3;
   }
   .mobile-bar{
-    @apply after:bg-[url('/images/bg-mb-bar.png')] after:bg-no-repeat after:bg-cover after:absolute after:right-[-250px] after:top-0 after:w-[500px] after:h-[500px]
+    @apply after:bg-[url('/images/bg-mb-bar.png')] after:bg-no-repeat after:bg-cover after:absolute after:right-[-250px] after:top-0 after:w-[500px] after:h-[500px] after:z-0
   }
   .about {
     @apply before:absolute before:bg-[url('/images/bg-shadow.png')] before:bg-cover lg:before:top-[200px] 

@@ -39,7 +39,7 @@ const SideBar = ({ activeMenu }: { activeMenu: string }) => {
             <svg
               width="14"
               height="14"
-              className="lg:hidden"
+              className="lg:hidden relative z-9"
               onClick={closeSideBar}
             >
               <use xlinkHref="../images/icons.svg#icon-close"></use>
