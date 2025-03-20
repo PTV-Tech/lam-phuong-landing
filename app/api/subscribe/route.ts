@@ -14,7 +14,7 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     console.log("=>(route.ts:18) error", error);
-    return new Response(JSON.stringify({ ok: false, error }), {
+    return new Response(JSON.stringify({ ok: false, error: JSON.stringify(error) }), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
