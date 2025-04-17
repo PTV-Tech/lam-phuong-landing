@@ -33,7 +33,7 @@ export async function GET(request: NextRequest) {
       },
     ).then((res) => res.json());
     const locationMap: { [key: string]: string } = {};
-    responseLocation.records.forEach((record: any) => {
+    (responseLocation.records || []).forEach((record: any) => {
       locationMap[record.id] = record.fields["Name"];
     });
     const data = response.records.map(

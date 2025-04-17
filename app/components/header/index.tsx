@@ -1,7 +1,7 @@
 "use client";
 import { RouterRoot } from "@/app/contants";
 import { usePathname, useRouter } from "next/navigation";
-import { Fragment, useEffect, useState } from "react";
+import {Fragment, useCallback, useEffect, useState} from "react";
 import { clsx } from "clsx";
 import Link from "next/link";
 import gsap from "gsap";
@@ -152,6 +152,27 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const onClick = useCallback((menu: any) => (e: any) => {
+    e.preventDefault();
+    if (pathname !== "/") {
+      router.push(`/#${menu.key}`);
+      return;
+    }
+    const targetId = menu.key;
+    const targetElement = document.getElementById(targetId);
+    const headerHeight =
+        document.querySelector("header")?.offsetHeight || 0;
+
+    if (targetElement) {
+      const targetPosition =
+          targetElement.offsetTop - headerHeight - 10;
+      window.scrollTo({
+        top: targetPosition,
+        behavior: "smooth",
+      });
+    }
+  }, [pathname])
+
   return (
     <header
       className={clsx("fixed w-full z-10 transition-all duration-300", {
@@ -175,22 +196,23 @@ const Navbar = () => {
                     <Link
                       href={url}
                       scroll={false}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        const targetId = menu.key;
-                        const targetElement = document.getElementById(targetId);
-                        const headerHeight =
-                          document.querySelector("header")?.offsetHeight || 0;
-
-                        if (targetElement) {
-                          const targetPosition =
-                            targetElement.offsetTop - headerHeight - 10;
-                          window.scrollTo({
-                            top: targetPosition,
-                            behavior: "smooth",
-                          });
-                        }
-                      }}
+                      onClick={onClick(menu)}
+                      // onClick={(e) => {
+                      //   e.preventDefault();
+                      //   const targetId = menu.key;
+                      //   const targetElement = document.getElementById(targetId);
+                      //   const headerHeight =
+                      //     document.querySelector("header")?.offsetHeight || 0;
+                      //
+                      //   if (targetElement) {
+                      //     const targetPosition =
+                      //       targetElement.offsetTop - headerHeight - 10;
+                      //     window.scrollTo({
+                      //       top: targetPosition,
+                      //       behavior: "smooth",
+                      //     });
+                      //   }
+                      // }}
                       className={clsx(
                         "text-primary px-5 py-2 rounded-3xl cursor-pointer transition link-menu",
                         {
