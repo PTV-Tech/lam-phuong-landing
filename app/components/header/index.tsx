@@ -31,11 +31,13 @@ const SideBar = ({ activeMenu }: { activeMenu: string }) => {
       {showSideBar && (
         <div className="fixed top-0 left-0 w-full h-screen bg-white p-8 mobile-bar">
           <div className="flex justify-between items-center mb-5">
-            <img
-              src="../images/logo.png"
-              alt=""
-              className="w-[160px] xl:w-[260px]"
-            />
+            <Link href="/">
+              <img
+                src="../images/logo.png"
+                alt=""
+                className="w-[160px] xl:w-[260px]"
+              />
+            </Link>
             <svg
               width="14"
               height="14"
@@ -161,11 +163,11 @@ const Navbar = () => {
     const targetId = menu.key;
     const targetElement = document.getElementById(targetId);
     const headerHeight =
-        document.querySelector("header")?.offsetHeight || 0;
+      document.querySelector("header")?.offsetHeight || 0;
 
     if (targetElement) {
       const targetPosition =
-          targetElement.offsetTop - headerHeight - 10;
+        targetElement.offsetTop - headerHeight - 10;
       window.scrollTo({
         top: targetPosition,
         behavior: "smooth",
@@ -181,11 +183,13 @@ const Navbar = () => {
     >
       <div className="container mx-auto p-6 lg:px-8 lg:py-2">
         <div className="flex justify-between items-center">
-          <img
-            src="../images/logo.png"
-            alt=""
-            className="w-[160px] xl:w-[260px] link-menu"
-          />
+          <Link href="/">
+            <img
+              src="../images/logo.png"
+              alt=""
+              className="w-[160px] xl:w-[260px] link-menu"
+            />
+          </Link>
           <div className="menu hidden md:hidden xl:block">
             <ul className="flex gap-8">
               {MENU_ITEMS.map((menu) => {
