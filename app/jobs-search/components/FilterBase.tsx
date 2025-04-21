@@ -8,7 +8,7 @@ import { ChevronRight } from "lucide-react";
 import {
   CONFIG_BY_KEY,
   FilterKeyEnum,
-} from "@/app/tim-kiem-viec-lam/constants";
+} from "@/app/jobs-search/constants";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 type FilterBaseProps = {

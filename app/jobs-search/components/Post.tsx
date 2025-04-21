@@ -10,7 +10,7 @@ type PostProps = {
 export default function Post({ slug, title, summary, location }: PostProps) {
   return (
     <div className="group rounded-3xl p-4 border border-light shadow-[0_2px_0_rgba(66,157,165,1)] flex flex-col gap-4 mb-6 bg-white">
-      <Link href={`/tim-kiem-viec-lam/chi-tiet/${slug}`}>
+      <Link href={`/jobs-search/chi-tiet/${slug}`}>
         <h2 className="group-hover:text-light hover:text-light text-[24px] lg:text-[36px] leading-9">
           {title}
         </h2>

@@ -1,7 +1,7 @@
 "use client";
 import { Accordion } from "@radix-ui/react-accordion";
 import FilterBase from "./FilterBase";
-import { FilterKeyEnum } from "@/app/tim-kiem-viec-lam/constants";
+import { FilterKeyEnum } from "@/app/jobs-search/constants";
 
 export default function Filter() {
   return (
