@@ -30,7 +30,7 @@ export default function Post({ slug, title, summary, location }: PostProps) {
 
         <Link href="https://airtable.com/applRt3FQ5QTJY6sn/pag3suI5n5zwMkT6o/form">
           <button className="cursor-pointer text-light lg:text-[18px] border border-light rounded-3xl px-4 py-1 hover:bg-light hover:text-white">
-            Ứng tuyển ngay
+            Apply Now
           </button>
         </Link>
       </div>
