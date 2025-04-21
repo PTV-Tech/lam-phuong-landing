@@ -15,7 +15,7 @@ const index = () => {
               </div>
               <div className="max-w-64">
                   <p>Contact:</p>
-                  <p>info@lamphuong.com.vn</p>
+                  <p>hr@lamphuong.com.vn</p>
               </div>
           </div>
         </div>  
