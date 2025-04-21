@@ -26,7 +26,7 @@ const index = () => {
                 được đồng hành cùng bạn trên hành trình này.
               </p>
               <Link
-                href="/tim-kiem-viec-lam"
+                href="/jobs-search"
                 className="text-light border border-light rounded-3xl px-4 py-3 inline-flex max-w-[160px] justify-center hover:bg-light hover:text-white"
               >
                 Xem công việc
