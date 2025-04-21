@@ -55,19 +55,19 @@ export default async function Page({
                 </div>
                 <div className="mb-4 [&>h3]:text-light [&>h3]:text-[22px] [&>h3]:mb-3 [&>ul]:list-disc [&>ul]:flex [&>ul]:flex-col [&>ul]:gap-3 [&>ul]:pl-5 [&>ul]:mb-5 whitespace-pre-line">
                   <h4 className="text-light text-[22px] mb-3">
-                    Mô tả công việc
+                    Job Description
                   </h4>
                   <Markdown>{data.description}</Markdown>
 
-                  <h4 className="text-light text-[22px] mb-3">Yêu cầu</h4>
+                  <h4 className="text-light text-[22px] mb-3">Requirements</h4>
                   <Markdown>{data.requirements}</Markdown>
 
-                  <h4 className="text-light text-[22px] mb-3">Quyền lợi</h4>
+                  <h4 className="text-light text-[22px] mb-3">Benefits</h4>
                   <Markdown>{data.benefits}</Markdown>
 
                   <Link href="https://airtable.com/applRt3FQ5QTJY6sn/pag3suI5n5zwMkT6o/form">
                     <button className="mt-10 cursor-pointer text-white lg:text-[18px] border border-light bg-light rounded-3xl px-4 py-2 hover:bg-white hover:text-light">
-                      Ứng tuyển ngay
+                      Apply Now
                     </button>
                   </Link>
                 </div>
