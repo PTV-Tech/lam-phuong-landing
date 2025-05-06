@@ -10,13 +10,54 @@ import Partners from "./components/partners";
 import { RouterRoot } from "@/app/contants";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import gsap from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
-const page = () => {
+gsap.registerPlugin(ScrollToPlugin);
+
+const Page = () => {
   useEffect(() => {
     AOS.init({
       duration: 1000,
       once: true,
     });
+  }, []);
+
+  useEffect(() => {
+    const handleHashScroll = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        const targetId = hash.substring(1); // Bỏ dấu # ở đầu
+        const targetElement = document.getElementById(targetId);
+
+        if (!targetElement) {
+          console.warn(`Element with id ${targetId} not found`);
+          return; // Thêm early return để tránh chạy code không cần thiết
+        }
+
+        setTimeout(() => {
+          const headerHeight =
+            document.querySelector("header")?.offsetHeight || 0;
+
+          gsap.to(window, {
+            duration: 1,
+            scrollTo: {
+              y: targetElement,
+              offsetY: headerHeight,
+            },
+            ease: "power3.inOut",
+          });
+        }, 100);
+      }
+    };
+
+    handleHashScroll();
+
+    window.addEventListener("hashchange", handleHashScroll);
+
+    return () => {
+      window.removeEventListener("hashchange", handleHashScroll);
+    };
   }, []);
 
   return (
@@ -52,4 +93,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

@@ -1,7 +1,7 @@
 export enum RouterRoot{
     Home = '/',
     About = 'about',
-    Career = 'careers',
+    Career = 'jobs-search',
     Partner = 'partner',
     Service = 'service',
     Studies = 'studies',
