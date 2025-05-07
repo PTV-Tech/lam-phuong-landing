@@ -124,7 +124,6 @@ export default function Header() {
     }
   };
 
-  // Base button classes for menu items
   const baseButtonClasses =
     "text-primary px-5 py-2 rounded-3xl cursor-pointer transition link-menu";
 
