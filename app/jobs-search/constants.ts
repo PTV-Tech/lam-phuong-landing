@@ -27,3 +27,10 @@ export const CONFIG_BY_KEY = {
     title: "Địa điểm",
   },
 };
+
+export const COLUMN_NAMES_OF_JOBS_TABLE = {
+  TITLE: "Tiêu đề",
+  INTRODUCE: "Giới thiệu",
+  LOCATION: "Name (from Khu vực)",
+  SLUG: "Slug",
+}

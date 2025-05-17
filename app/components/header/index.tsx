@@ -17,7 +17,7 @@ const MENU_ITEMS = [
   { label: "ABOUT", key: RouterRoot.About },
   { label: "OUR SERVICES", key: RouterRoot.Service },
   { label: "CASE STUDIES", key: RouterRoot.Studies },
-  { label: "jobs-search", key: RouterRoot.Career, isNewPage: true },
+  { label: "CAREERS", key: RouterRoot.Career, isNewPage: true },
   { label: "OUR PARTNERS", key: RouterRoot.Partner },
 ];
 

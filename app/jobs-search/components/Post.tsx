@@ -4,10 +4,10 @@ type PostProps = {
   slug: string;
   title: string;
   summary: string;
-  location: string;
+  locations: string;
 };
 
-export default function Post({ slug, title, summary, location }: PostProps) {
+export default function Post({ slug, title, summary, locations }: PostProps) {
   return (
     <div className="group rounded-3xl p-4 border border-light shadow-[0_2px_0_rgba(66,157,165,1)] flex flex-col gap-4 mb-6 bg-white">
       <Link href={`/jobs-search/chi-tiet/${slug}`}>
@@ -23,7 +23,7 @@ export default function Post({ slug, title, summary, location }: PostProps) {
               <svg width="13" height="18">
                 <use xlinkHref="../images/icons.svg#icon-location" />
               </svg>
-              <p className="text-light">{location}</p>
+              <p className="text-light">{locations}</p>
             </div>
           )}
         </div>

@@ -1,7 +1,13 @@
-import logger from "lib/consola"
-import { getLocationsList } from "./getLocationsList";
+import { COLUMN_NAMES_OF_JOBS_TABLE } from "@/app/jobs-search/constants";
 
-export const getJobsList = async () => {
+export type Post = {
+  title: string;
+  summary: string;
+  slug: string;
+  locations: string;
+}
+
+export const getJobsList = async (): Promise<{ offset: string, data: Post[] }> => {
   const response = await fetch(
     `${process.env.AIRTABLE_BASE_URL}/${process.env.AIRTABLE_BASE_ID}/${process.env.AIRTABLE_JOBS_TABLE}/listRecords`,
     {
@@ -12,28 +18,25 @@ export const getJobsList = async () => {
       },
       body: JSON.stringify({
         pageSize: 5,
-        fields: ["Tiêu đề", "Giới thiệu", "Khu vực", "Slug"],
+        fields: [
+          COLUMN_NAMES_OF_JOBS_TABLE.TITLE,
+          COLUMN_NAMES_OF_JOBS_TABLE.INTRODUCE,
+          COLUMN_NAMES_OF_JOBS_TABLE.LOCATION,
+          COLUMN_NAMES_OF_JOBS_TABLE.SLUG,
+        ],
         view: "Grid view",
-        filterByFormula: `FIND("Approved", {Status})`
+        filterByFormula: `FIND("Approved", {Status})`,
       }),
     },
   ).then((res) => res.json());
 
-  let locations: string[] = [];
-  const { offset, records } = response;
-  if (Array.isArray(records) && records.length > 0) {
-    for (const record of records) {
-      locations = [...locations, ...record['fields']['Khu vực']]
-    }
-  }
-  const locationsFilter = `OR(${locations.map(item => `RECORD_ID()="${item}"`).join(',')})`;
-  const locationsMapper = await getLocationsList(locationsFilter);
 
-  const data = records.map(({ fields, id }: any) => ({
-    title: fields["Tiêu đề"],
-    summary: fields["Giới thiệu"],
-    slug: `${fields["Slug"]}-${id}`,
-    locations: locationsMapper[fields["Khu vực"][0]]
+  const { offset, records } = response;
+  const data: Post[] = records.map(({ fields, id }: any) => ({
+    title: fields[COLUMN_NAMES_OF_JOBS_TABLE.TITLE],
+    summary: fields[COLUMN_NAMES_OF_JOBS_TABLE.INTRODUCE],
+    slug: `${fields[COLUMN_NAMES_OF_JOBS_TABLE.SLUG]}-${id}`,
+    locations: fields[COLUMN_NAMES_OF_JOBS_TABLE.LOCATION].join(", "),
   }));
 
   return {

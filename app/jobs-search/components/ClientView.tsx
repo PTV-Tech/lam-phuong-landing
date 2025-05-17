@@ -1,15 +1,16 @@
 "use client";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import SubscribeSection from "./SubscribeSection";
 import { ChevronDown } from "lucide-react";
 import Banner from "@/public/images/banner-page.png";
 import Image from "next/image";
 import Post from "./Post";
 import Filter from "./Filter";
+import { Post as PostType } from "../data/getJobsList";
 
 type ClientViewProps = {
   offset: string | null;
-  data: { title: string; summary: string; location: string; slug: string }[];
+  data: PostType[];
   filterByFormula: string;
 };
 
@@ -18,10 +19,7 @@ export default function ClientView({
   data,
   filterByFormula,
 }: ClientViewProps) {
-  const [records, setRecords] =
-    useState<
-      { title: string; summary: string; location: string; slug: string }[]
-    >(data);
+  const [records, setRecords] = useState<PostType[]>(data);
   const [offset, setOffset] = useState<string | null>(initialOffset);
   const [, setLoading] = useState<boolean>(false);
 
@@ -31,7 +29,7 @@ export default function ClientView({
 
   useEffect(() => {
     setRecords(data);
-  }, [data])
+  }, [data]);
 
   const loadMore = async () => {
     if (!offset) {
@@ -69,7 +67,7 @@ export default function ClientView({
 
           <div className="flex flex-col lg:grid lg:grid-cols-3 gap-8 mt-5 lg:mt-16">
             <div className="col-span-1">
-              <Filter />
+              {/*<Filter />*/}
 
               <SubscribeSection />
             </div>
