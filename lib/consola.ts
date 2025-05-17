@@ -1,3 +1,7 @@
-import consola from 'consola';
+import { createConsola } from "consola";
 
-export default consola;
+const isLocal = process.env.NODE_ENV === "development";
+
+export const logger = createConsola({
+  level: isLocal ? 4 : 0,
+});

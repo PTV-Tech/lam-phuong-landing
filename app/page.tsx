@@ -12,6 +12,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import { logger } from "@/lib/consola";
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -19,7 +20,7 @@ const Page = () => {
   useEffect(() => {
     AOS.init({
       duration: 1000,
-      once: true,
+      once: true
     });
   }, []);
 
@@ -43,9 +44,9 @@ const Page = () => {
             duration: 1,
             scrollTo: {
               y: targetElement,
-              offsetY: headerHeight,
+              offsetY: headerHeight
             },
-            ease: "power3.inOut",
+            ease: "power3.inOut"
           });
         }, 100);
       }
