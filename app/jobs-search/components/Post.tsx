@@ -18,7 +18,7 @@ export default function Post({ slug, title, summary, locations }: PostProps) {
       <p className="line-clamp-3">{summary}</p>
       <div className="flex justify-between items-center">
         <div className="group">
-          {!!location && (
+          {!!locations && (
             <div className="flex items-center gap-2">
               <svg width="13" height="18">
                 <use xlinkHref="../images/icons.svg#icon-location" />
