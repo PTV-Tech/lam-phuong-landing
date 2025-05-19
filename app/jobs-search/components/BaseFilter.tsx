@@ -1,24 +1,29 @@
-import useSWR from "swr";
-import { getJobTypesList } from "@/app/jobs-search/data/getJobTypesList";
-import { logger } from "@/lib/consola";
-import { AccordionContent, AccordionItem, AccordionTrigger } from "@radix-ui/react-accordion";
+import {
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@radix-ui/react-accordion";
 import { CONFIG_BY_KEY } from "@/app/jobs-search/constants";
 import { ChevronRight } from "lucide-react";
 
-export default function FilterByJobTypes() {
-  const { data, isLoading } = useSWR("/api/job-types", getJobTypesList);
-  logger.success("data: ", data);
+type BaseFilterProps = {
+  value: string
+  title: string
+  data: { name: string; id: string }[]
+  activeIDs: string[]
+};
+
+export default function BaseFilter({ value, title, data, activeIDs }: BaseFilterProps) {
   return (
-    <AccordionItem value="a">
+    <AccordionItem value={value}>
       <AccordionTrigger className="flex justify-between cursor-pointer text-light lg:text-[30px] text-[25px] mb-5 items-center w-full [&[data-state=open]>svg]:rotate-90">
-        Loại công việc
+        {title}
         <ChevronRight className="h-6 w-6 shrink-0 text-light transition-transform duration-200" />
       </AccordionTrigger>
+
       <AccordionContent className="pb-5 px-3">
-        {(data || []).map(({ name }) => {
-          // const checked = !!searchParams
-          //   .get(CONFIG_BY_KEY[filterKey].key)
-          //   ?.includes(name);
+        {data.map(({ name }) => {
+          const checked = activeIDs.includes(name);
 
           return (
             <div
@@ -29,10 +34,8 @@ export default function FilterByJobTypes() {
                 id={name}
                 type="checkbox"
                 className="h-[20px] w-[20px]"
-                checked={false}
-                onChange={() => {}}
-                // onChange={handleClick(name)}
-                // checked={checked}
+                onChange={handleClick(name)}
+                checked={checked}
               />
               <label htmlFor={name}>{name}</label>
             </div>
