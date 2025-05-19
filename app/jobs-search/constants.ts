@@ -34,3 +34,8 @@ export const COLUMN_NAMES_OF_JOBS_TABLE = {
   LOCATION: "Name (from Khu vực)",
   SLUG: "Slug",
 }
+
+export const COLUMN_NAMES_OF_JOB_TYPES_TABLE = {
+  TITLE: "Name",
+  SLUG: "Slug"
+}

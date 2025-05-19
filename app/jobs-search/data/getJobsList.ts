@@ -22,8 +22,6 @@ export const getJobsList = async (): Promise<{
                 filterByFormula: `FIND("Approved", {Status})`,
             },
         );
-        logger.info("response: ", response.data.records[0]);
-
         const offset = response.data.offset ?? "";
         const records = response.data.records ?? [];
         const data: JobPostingListItem[] = records.map(({fields, id}: any) => ({

@@ -4,8 +4,14 @@ import axios, {
   InternalAxiosRequestConfig,
 } from "axios";
 
+const isServer = typeof window === "undefined";
+
 const instance: AxiosInstance = axios.create({
-  baseURL: process.env.AIRTABLE_BASE_URL || "https://api.airtable.com/v0",
+  ...(isServer
+    ? {
+        baseURL: process.env.AIRTABLE_BASE_URL || "https://api.airtable.com/v0",
+      }
+    : {}),
   timeout: 10e3,
   headers: {
     "Content-Type": "application/json",
