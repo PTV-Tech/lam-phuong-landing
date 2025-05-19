@@ -27,7 +27,7 @@ export const getJobsList = async (): Promise<{
     const data: JobPostingListItem[] = records.map(({ fields, id }: any) => ({
       title: fields[COLUMN_NAMES_OF_JOBS_TABLE.TITLE],
       summary: fields[COLUMN_NAMES_OF_JOBS_TABLE.INTRODUCE],
-      slug: fields[COLUMN_NAMES_OF_JOBS_TABLE.SLUG],
+      slug: fields[COLUMN_NAMES_OF_JOBS_TABLE.SLUG].value,
       locations: fields[COLUMN_NAMES_OF_JOBS_TABLE.LOCATION].join(", "),
       id,
     }));

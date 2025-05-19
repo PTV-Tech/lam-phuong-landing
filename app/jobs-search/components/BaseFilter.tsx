@@ -5,6 +5,7 @@ import {
 } from "@radix-ui/react-accordion";
 import { CONFIG_BY_KEY } from "@/app/jobs-search/constants";
 import { ChevronRight } from "lucide-react";
+import { logger } from "@/lib/consola";
 
 type BaseFilterProps = {
   value: string
@@ -14,6 +15,7 @@ type BaseFilterProps = {
 };
 
 export default function BaseFilter({ value, title, data, activeIDs }: BaseFilterProps) {
+  logger.success("data: ", data);
   return (
     <AccordionItem value={value}>
       <AccordionTrigger className="flex justify-between cursor-pointer text-light lg:text-[30px] text-[25px] mb-5 items-center w-full [&[data-state=open]>svg]:rotate-90">
@@ -34,7 +36,7 @@ export default function BaseFilter({ value, title, data, activeIDs }: BaseFilter
                 id={name}
                 type="checkbox"
                 className="h-[20px] w-[20px]"
-                onChange={handleClick(name)}
+                // onChange={handleClick(name)}
                 checked={checked}
               />
               <label htmlFor={name}>{name}</label>

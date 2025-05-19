@@ -17,6 +17,7 @@ export async function GET() {
     );
     const data = response.data.records.map((item: any) => ({
       name: item.fields[COLUMN_NAMES_OF_JOB_TYPES_TABLE.TITLE],
+      slug: item.fields[COLUMN_NAMES_OF_JOB_TYPES_TABLE.SLUG].value,
       id: item.id,
     }));
     return new Response(JSON.stringify(data), {
